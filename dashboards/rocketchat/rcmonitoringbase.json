@@ -53,7 +53,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1586662683889,
+  "iteration": 1586795584712,
   "links": [],
   "panels": [
     {
@@ -133,7 +133,8 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "rocketchat_version{job=\"$server\"}",
+          "expr": "rocketchat_version{instance=\"$selinstance\",job=\"$server\"}",
+          "interval": "",
           "legendFormat": "{{version}}",
           "refId": "A"
         }
@@ -218,7 +219,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "rocketchat_version{job=\"$server\"}",
+          "expr": "rocketchat_info{instance=\"$selinstance\",job=\"$server\"}",
           "interval": "",
           "legendFormat": "{{site_url}}",
           "refId": "A"
@@ -303,7 +304,9 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "rocketchat_instance_count{job=\"$server\"}",
+          "expr": "rocketchat_instance_count{instance=\"$selinstance\",job=\"$server\"}",
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -383,9 +386,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "max(rocketchat_users_total{job=\"$server\"})",
+          "expr": "max(rocketchat_users_total{instance=\"$selinstance\",job=\"$server\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -463,9 +468,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "max(rocketchat_users_total{job=\"$server\"})",
+          "expr": "max(rocketchat_users_total{instance=\"$selinstance\",job=\"$server\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -545,7 +552,9 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "rocketchat_direct_total{job=\"$server\"}",
+          "expr": "rocketchat_direct_total{instance=\"$selinstance\",job=\"$server\"}",
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -625,9 +634,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "max(rocketchat_rooms_total{job=\"$server\"})",
+          "expr": "max(rocketchat_rooms_total{instance=\"$selinstance\",job=\"$server\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -707,7 +718,9 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "rocketchat_private_groups_total{job=\"$server\"}",
+          "expr": "rocketchat_private_groups_total{instance=\"$selinstance\",job=\"$server\"}",
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -1029,7 +1042,9 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "rocketchat_livechat_total{job=\"$server\"}",
+          "expr": "rocketchat_livechat_total{instance=\"$selinstance\",job=\"$server\"}",
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -1109,8 +1124,9 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(rocketchat_ddp_connected_users{job=\"$server\"})",
+          "expr": "sum(rocketchat_ddp_connected_users{instance=\"$selinstance\",job=\"$server\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
           "refId": "A"
@@ -1190,9 +1206,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "max(rocketchat_messages_total{job=\"$server\"})",
+          "expr": "max(rocketchat_messages_total{instance=\"$selinstance\",job=\"$server\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -1272,7 +1290,9 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "rocketchat_livechat_messages_total{job=\"$server\"}",
+          "expr": "rocketchat_livechat_messages_total{instance=\"$selinstance\",job=\"$server\"}",
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -1348,11 +1368,12 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rocketchat_messages_total{job=\"$server\"}",
+          "expr": "rocketchat_messages_total{instance=\"$selinstance\",job=\"$server\"}",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 10,
-          "legendFormat": "{{job}}",
+          "legendFormat": "{{instance}}",
           "refId": "A"
         }
       ],
@@ -1440,10 +1461,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(rocketchat_message_sent{job=\"$server\"}[5m])",
+          "expr": "increase(rocketchat_message_sent{instance=\"$selinstance\",job=\"$server\"}[5m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 10,
-          "legendFormat": "{{job}}",
+          "legendFormat": "{{instance}}",
           "refId": "A"
         }
       ],
@@ -1539,17 +1561,19 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(rocketchat_users_online{job=\"$server\"})",
+          "expr": "avg(rocketchat_users_online{instance=\"$selinstance\",job=\"$server\"})",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Online",
           "refId": "A"
         },
         {
-          "expr": "avg(rocketchat_users_away{job=\"$server\"})",
+          "expr": "avg(rocketchat_users_away{instance=\"$selinstance\",job=\"$server\"})",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Away",
           "refId": "B"
@@ -1759,25 +1783,28 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(increase(rocketchat_meteor_stream{job=\"$server\"}[5m])) by (stream,eventName)",
+          "expr": "sum(increase(rocketchat_meteor_stream{instance=\"$selinstance\",job=\"$server\"}[5m])) by (stream,eventName)",
           "format": "time_series",
           "hide": true,
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{stream}}/{{eventName}}",
           "refId": "A"
         },
         {
-          "expr": "sum(increase(rocketchat_meteor_streamer_broadcast{job=\"$server\"}[5m])) by (stream,eventName)",
+          "expr": "sum(increase(rocketchat_meteor_streamer_broadcast{instance=\"$selinstance\",job=\"$server\"}[5m])) by (stream,eventName)",
           "format": "time_series",
           "hide": true,
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "broadcast ({{stream}}/{{eventName}})",
           "refId": "B"
         },
         {
-          "expr": "sum(rate(rocketchat_oplog{job=\"$server\"}[5m])) by (collection,op)",
+          "expr": "sum(rate(rocketchat_oplog{instance=\"$selinstance\",job=\"$server\"}[5m])) by (collection,op)",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{collection}}/{{op}}",
           "refId": "C"
@@ -1875,8 +1902,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max(rocketchat_users_total)",
+          "expr": "max(rocketchat_users_total{instance=\"$selinstance\",job=\"$server\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Users",
           "refId": "A"
@@ -1975,8 +2003,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max(rocketchat_rooms_total)",
+          "expr": "max(rocketchat_rooms_total{instance=\"$selinstance\",job=\"$server\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Rooms",
           "refId": "A"
@@ -2075,8 +2104,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rocketchat_notification_sent) by (notification_type)",
+          "expr": "sum(rocketchat_notification_sent{instance=\"$selinstance\",job=\"$server\"}) by (notification_type)",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{notification_type}}",
           "refId": "A"
@@ -2301,8 +2331,9 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "nodejs_version_info{job=\"$server\"}",
+          "expr": "nodejs_version_info{instance=\"$selinstance\",job=\"$server\"}",
           "hide": false,
+          "interval": "",
           "legendFormat": "{{version}}",
           "refId": "A"
         }
@@ -2366,8 +2397,9 @@
         {
           "expr": "nodejs_active_requests_total{job=\"$server\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{job}}",
+          "legendFormat": "{{instance}}",
           "refId": "A"
         }
       ],
@@ -2456,8 +2488,9 @@
         {
           "expr": "nodejs_active_handles_total{job=\"$server\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{job}}",
+          "legendFormat": "{{instance}}",
           "refId": "A"
         }
       ],
@@ -2544,10 +2577,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (space) (nodejs_heap_size_used_bytes{job=\"$server\"})",
+          "expr": "nodejs_heap_size_used_bytes{job=\"$server\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{space}}",
+          "legendFormat": "{{instance}}",
           "refId": "A"
         }
       ],
@@ -2636,8 +2670,9 @@
         {
           "expr": "nodejs_eventloop_lag_seconds{job=\"$server\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{job}}",
+          "legendFormat": "{{instance}}",
           "refId": "A"
         }
       ],
@@ -2724,10 +2759,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "nodejs_version_info{job=\"$server\"}",
+          "expr": "nodejs_external_memory_bytes{job=\"$server\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{space}}",
+          "legendFormat": "{{instance}}",
           "refId": "A"
         }
       ],
@@ -2735,7 +2771,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Heap used",
+      "title": "External memory",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2795,7 +2831,7 @@
             "h": 6,
             "w": 12,
             "x": 0,
-            "y": 52
+            "y": 46
           },
           "hiddenSeries": false,
           "id": 58,
@@ -2829,15 +2865,17 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(rocketchat_ddp_rate_limit_exceeded{user_id!=\"null\"}[5m])) by (limit_name)",
+              "expr": "sum(increase(rocketchat_ddp_rate_limit_exceeded{instance=\"$selinstance\",job=\"$server\",user_id!=\"null\"}[5m])) by (limit_name)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{limit_name}} (not null)",
               "refId": "A"
             },
             {
-              "expr": "sum(increase(rocketchat_ddp_rate_limit_exceeded{user_id=\"null\"}[5m])) by (limit_name)",
+              "expr": "sum(increase(rocketchat_ddp_rate_limit_exceeded{instance=\"$selinstance\",job=\"$server\",user_id=\"null\"}[5m])) by (limit_name)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{limit_name}} (null)",
               "refId": "B"
@@ -2896,7 +2934,7 @@
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 52
+            "y": 46
           },
           "hiddenSeries": false,
           "id": 59,
@@ -2997,7 +3035,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 58
+            "y": 52
           },
           "hiddenSeries": false,
           "id": 61,
@@ -3031,8 +3069,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(rocketchat_ddp_rate_limit_exceeded[5m])) by (user_id)",
+              "expr": "sum(increase(rocketchat_ddp_rate_limit_exceeded{instance=\"$selinstance\",job=\"$server\"}[5m])) by (user_id)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{user_id}}",
               "refId": "A"
@@ -3091,7 +3130,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 58
+            "y": 52
           },
           "hiddenSeries": false,
           "id": 60,
@@ -3125,8 +3164,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(rocketchat_ddp_rate_limit_exceeded{user_id!=\"null\"}[5m])) by (connection_id)",
+              "expr": "sum(increase(rocketchat_ddp_rate_limit_exceeded{instance=\"$selinstance\",job=\"$server\",user_id!=\"null\"}[5m])) by (connection_id)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{connection_id}} (not null)",
               "refId": "A"
@@ -3208,7 +3248,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 116
+            "y": 61
           },
           "hiddenSeries": false,
           "id": 40,
@@ -3245,8 +3285,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rocketchat_meteor_methods) by (method) * sum(increase(rocketchat_meteor_methods_count[5m])) by (method)",
+              "expr": "sum(rocketchat_meteor_methods{instance=\"$selinstance\",job=\"$server\"}) by (method) * sum(increase(rocketchat_meteor_methods_count{instance=\"$selinstance\",job=\"$server\"}[5m])) by (method)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{method}}",
               "refId": "A"
@@ -3306,7 +3347,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 123
+            "y": 68
           },
           "hiddenSeries": false,
           "id": 8,
@@ -3341,8 +3382,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rocketchat_meteor_methods) by (method)",
+              "expr": "sum(rocketchat_meteor_methods{instance=\"$selinstance\",job=\"$server\"}) by (method)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{method}}",
               "refId": "A"
@@ -3401,7 +3443,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 123
+            "y": 68
           },
           "hiddenSeries": false,
           "id": 14,
@@ -3435,8 +3477,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(rocketchat_meteor_methods_count[5m])) by (method)",
+              "expr": "sum(increase(rocketchat_meteor_methods_count{instance=\"$selinstance\",job=\"$server\"}[5m])) by (method)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{method}}",
               "refId": "A"
@@ -3510,7 +3553,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 117
+            "y": 48
           },
           "hiddenSeries": false,
           "id": 41,
@@ -3546,8 +3589,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rocketchat_meteor_subscriptions) by (subscription) * sum(increase(rocketchat_meteor_subscriptions_count[5m])) by (subscription)",
+              "expr": "sum(rocketchat_meteor_subscriptions{instance=\"$selinstance\",job=\"$server\"}) by (subscription) * sum(increase(rocketchat_meteor_subscriptions_count{instance=\"$selinstance\",job=\"$server\"}[5m])) by (subscription)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{subscription}}",
               "refId": "A"
@@ -3606,7 +3650,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 125
+            "y": 56
           },
           "hiddenSeries": false,
           "id": 9,
@@ -3640,8 +3684,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rocketchat_meteor_subscriptions) by (subscription)",
+              "expr": "sum(rocketchat_meteor_subscriptions{instance=\"$selinstance\",job=\"$server\"}) by (subscription)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{subscription}}",
               "refId": "A"
@@ -3700,7 +3745,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 125
+            "y": 56
           },
           "hiddenSeries": false,
           "id": 15,
@@ -3734,8 +3779,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(rocketchat_meteor_subscriptions_count[5m])) by (subscription)",
+              "expr": "sum(increase(rocketchat_meteor_subscriptions_count{instance=\"$selinstance\",job=\"$server\"}[5m])) by (subscription)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{subscription}}",
               "refId": "A"
@@ -3809,7 +3855,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 118
+            "y": 49
           },
           "hiddenSeries": false,
           "id": 53,
@@ -3845,8 +3891,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rocketchat_callbacks) by (callback) * sum(increase(rocketchat_callbacks_count[5m])) by (callback)",
+              "expr": "sum(rocketchat_callbacks{instance=\"$selinstance\",job=\"$server\"}) by (callback) * sum(increase(rocketchat_callbacks_count{instance=\"$selinstance\",job=\"$server\"}[5m])) by (callback)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{callback}}",
               "refId": "A"
@@ -3905,7 +3952,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 126
+            "y": 57
           },
           "hiddenSeries": false,
           "id": 16,
@@ -3939,8 +3986,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(irate(rocketchat_callbacks[5m])) by (callback)",
+              "expr": "sum(irate(rocketchat_callbacks{instance=\"$selinstance\",job=\"$server\"}[5m])) by (callback)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{callback}}",
               "refId": "A"
@@ -3999,7 +4047,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 126
+            "y": 57
           },
           "hiddenSeries": false,
           "id": 17,
@@ -4102,7 +4150,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 134
+            "y": 65
           },
           "hiddenSeries": false,
           "id": 54,
@@ -4138,8 +4186,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rocketchat_hooks) by (hook) * sum(increase(rocketchat_hooks_count[5m])) by (hook)",
+              "expr": "sum(rocketchat_hooks{instance=\"$selinstance\",job=\"$server\"}) by (hook) * sum(increase(rocketchat_hooks_count{instance=\"$selinstance\",job=\"$server\"}[5m])) by (hook)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{hook}}",
               "refId": "A"
@@ -4198,7 +4247,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 142
+            "y": 73
           },
           "hiddenSeries": false,
           "id": 34,
@@ -4232,8 +4281,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(irate(rocketchat_hooks[5m])) by (hook)",
+              "expr": "sum(irate(rocketchat_hooks{instance=\"$selinstance\",job=\"$server\"}[5m])) by (hook)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{hook}}",
               "refId": "A"
@@ -4292,7 +4342,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 142
+            "y": 73
           },
           "hiddenSeries": false,
           "id": 33,
@@ -4326,17 +4376,19 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(rocketchat_hooks_count[5m])) by (hook)",
+              "expr": "sum(increase(rocketchat_hooks_count{instance=\"$selinstance\",job=\"$server\"}[5m])) by (hook)",
               "format": "time_series",
               "hide": false,
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{hook}}",
               "refId": "A"
             },
             {
-              "expr": "sum(rocketchat_callbacks_count) by (hook)",
+              "expr": "sum(rocketchat_callbacks_count{instance=\"$selinstance\",job=\"$server\"}) by (hook)",
               "format": "time_series",
               "hide": true,
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{hook}}",
               "refId": "B"
@@ -4410,7 +4462,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 8
+            "y": 50
           },
           "hiddenSeries": false,
           "id": 52,
@@ -4446,8 +4498,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rocketchat_rest_api) by (entrypoint) * sum(increase(rocketchat_rest_api_count[5m])) by (entrypoint)",
+              "expr": "sum(rocketchat_rest_api{instance=\"$selinstance\",job=\"$server\"}) by (entrypoint) * sum(increase(rocketchat_rest_api_count{instance=\"$selinstance\",job=\"$server\"}[5m])) by (entrypoint)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{entrypoint}}",
               "refId": "A"
@@ -4506,7 +4559,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 15
+            "y": 57
           },
           "hiddenSeries": false,
           "id": 18,
@@ -4540,8 +4593,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(irate(rocketchat_rest_api[5m])) by (entrypoint)",
+              "expr": "sum(irate(rocketchat_rest_api{instance=\"$selinstance\",job=\"$server\"}[5m])) by (entrypoint)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{entrypoint}}",
               "refId": "A"
@@ -4600,7 +4654,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 15
+            "y": 57
           },
           "hiddenSeries": false,
           "id": 19,
@@ -4634,8 +4688,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(rocketchat_rest_api_count[5m])) by (entrypoint)",
+              "expr": "sum(increase(rocketchat_rest_api_count{instance=\"$selinstance\",job=\"$server\"}[5m])) by (entrypoint)",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{entrypoint}}",
               "refId": "A"
@@ -4726,6 +4781,29 @@
         "query": "rocketchat_ddp_connected_users",
         "refresh": 1,
         "regex": ".*job=\"(.*?)\".*",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "rocketchat_version",
+        "hide": 0,
+        "includeAll": false,
+        "index": -1,
+        "label": "instance",
+        "multi": false,
+        "name": "selinstance",
+        "options": [],
+        "query": "rocketchat_version",
+        "refresh": 1,
+        "regex": ".*instance=\"(.*?)\".*job=\"$server\".*",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
