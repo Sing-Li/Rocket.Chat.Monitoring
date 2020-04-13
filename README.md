@@ -219,7 +219,7 @@ Point your browser to access the grafana login at:
 
 
 ```
-http://<host IP of grafana container>:3300
+http://<host IP of grafana container>:3037
 ```
 
 ![grafana login screen](images/grafanalogin.png)
