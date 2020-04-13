@@ -24,7 +24,7 @@ The monitoring stack used in this project is adaptive to all platforms and can e
 
 For security reasons, Rocket.Chat servers do not expose any operational metrics by default.  You must turn it on. 
 
-For each server you want to monitor, sign in as administrator and then go to Administration -> Logs -> Prometheus and make sure you **enable** it and remember the default port used.  Save your changes.
+For each server you want to monitor, sign in as administrator and then go to **Administration -> Logs -> Prometheus** and make sure you **enable** it and remember the default port used.  Save your changes.
 
 ![Enable Prometheus metrics exposure](images/turnonprom.png)
 
@@ -246,5 +246,68 @@ This is only a basic "starter" dashboard that we included. It has many of the us
 
 You are likely only to need a subset of the panels on the dashboards and can customize it to your needs.   You are encouraged to study the [grafana dashboard design documentation](https://grafana.com/docs/grafana/latest/features/dashboard/dashboards/) and customize or create your own.   Please consider contributing any useful dashboards that you create back to this project.
 
+#### 5.   (optional) Setup system level monitoring with node exporter and grafana
 
+One frequently requested addition to Rocket.Chat's application level monitoring is the ability to monitor the system that is hosting the server itself.   Namely to visualize the underlying CPU usage, memory consumption, disk usage, network traffic and so on.   
+
+This obviously will require operating system level access to extract the metrics. And the data collected is pertained to the  entire physical-machine/vm/vps that may be running many Rocket.Chat containers/instances, prometheus and grafana, and other services/tasks. 
+
+Thankfully, prometheus has created an open source [node exporter](https://github.com/prometheus/node_exporter) that will directly access the linux system (via mechanisms such as [procfs](https://www.kernel.org/doc/Documentation/filesystems/proc.txt) ) and convert the information in realtime to prometheus compatible metrics.   These system metrics can then be visualized on grafana dashboards.  
+
+With the work you've already completed in step 1 to 4, it is very easy to add node exporter to the data collectors mix.  You can start node-exporter collecting data, on the machine/vm/vps that you want to collect data on, by going to the `nodeexporter` directory and running the `docker-compose.yml` there.
+
+```
+sudo docker-compose up -d
+```
+
+It is necessary to run node-exporter as superuser to access some of the stats provided by its plugin _system collectors_. You can, however, opt to run it without superuser privileges and still obtain most of the CPU, memory, disk and publicly accessible metrics.
+
+Check the logs immediately.  If everything works fine, you should see a message similar to.
+
+```
+msg="Listening on" address=:9100
+
+```
+
+You can also see the converted prometheus compatible metrics.
+
+```
+curl  http://<host where node exporter is running>:9100 
+```
+
+At this point, you will want to close up port 9100 by removing it from the `docker-compose.yml` and restarting the node exporter container.
+
+Next, you need to tell prometheus about this additional service to scrape.   You can do this by adding a `job` to the `scrape_configs` section in the `prometheus/config/prometheus.yml` file and then restarting the prometheus container. 
+
+```
+scrape_configs:
+
+  - job_name: <short name of the physical machine or vm or vps>
+    dns_sd_configs:
+    - names: [<name or id of node exporter container>]
+      type: A
+      port: 9100
+
+```
+Here we assumed that you have setup the local monitoring network as detailed in the previous steps and used a naming service config.  If your networking topology differs, you will have to hardwire the ip address in a job with a static config.  If you are scraping across a physical network, you may want to add more jobs to scrape the different physical-machines/vms/vps hosting the Rocket.Chat servers.
+
+After restarting the promethus container.  You can setup grafana to display the data.   
+
+This time, you will obtain a pre-fabricated ready-to-go dashboard shared by the grafana community for displaying the node exporter metrics.   Visit the [grafana dashboards repository](https://grafana.com/grafana/dashboards) to see the hundreds of community contributed (and official) dashboards available.
+
+![node exporter full dashboard by idealista](images/reponodedash.png)  
+
+The dashboard you will use is the [classic node exporter full dashboard by idealista](https://grafana.com/grafana/dashboards/1860).   It has a full mapping of node exporter metrics in its panels, and is an ideal base to customize for your own needs.  Note the unique dashboard id, in this case `1860`.   Grafana can directly import dashboards from this public repository via the dashboard id.
+
+Login to grafana, click the **+** button and select import again.
+
+![grafana import page](images/importpage.png) 
+
+Enter the dashboard id `1860`, wait for the dashboard information to be fetched by grafana.
+
+Then select your prometheus data source and click **Import**.
+
+The dashboard should start immediately displaying the system metrics from your machine/vm/vps.  In the **job** drop down list,  you can select to monitor the different physical-machines/vms/vps you are monitoring  (assuming you have setup multiple jobs earlier). 
+
+![system metrics displayed by the dashboard](images/systemmetrics.png)
 
