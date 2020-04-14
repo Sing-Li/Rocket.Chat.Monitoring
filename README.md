@@ -315,4 +315,32 @@ The dashboard should start immediately displaying the system metrics from your m
 
 This next optional step is to add container level monitoring metrics via [Google's cadvisor](https://github.com/google/cadvisor).  
 
-See `cadvisor/docker-compose.yml` for the conifguration.   Note that this configuration is for docker installed via snap.  If you installed docker directly on your system, please modify the `volume` mapping accordingly.
+See `cadvisor/docker-compose.yml` for the conifguration.   Note that this configuration is for docker installed via snap. 
+
+If you installed docker directly on your system, you will need to modify one of the `volume` mappings:
+
+```
+"/var/lib/docker:/var/lib/docker:ro"
+```
+
+You can now start cadvisor running:
+
+```
+docker-compose up -d
+```
+
+Next, you need to add a scrape job for prometheus in the `prometheus/config/prometheus.yml` file.  Here, we will assume you have the monitoring network setup with naming service available.
+
+```
+scrape_configs:
+
+  - job_name: containers
+    dns_sd_configs:
+    - names: [<name or id of cadivisor container>]
+      type: A
+      port: 8080
+```
+
+
+
+
