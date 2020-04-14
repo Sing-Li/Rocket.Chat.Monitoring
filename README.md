@@ -311,3 +311,8 @@ The dashboard should start immediately displaying the system metrics from your m
 
 ![system metrics displayed by the dashboard](images/systemmetrics.png)
 
+#### 6.   (optional) Setup docker container level monitoring with cadvisor
+
+This next optional step is to add container level monitoring metrics via [Google's cadvisor](https://github.com/google/cadvisor).  
+
+See `cadvisor/docker-compose.yml` for the conifguration.   Note that this configuration is for docker installed via snap.  If you installed docker directly on your system, please modify the `volume` mapping accordingly.
