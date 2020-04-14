@@ -311,3 +311,54 @@ The dashboard should start immediately displaying the system metrics from your m
 
 ![system metrics displayed by the dashboard](images/systemmetrics.png)
 
+#### 6.   (optional) Setup docker container level monitoring with cadvisor
+
+This next optional step is to add container level monitoring metrics via [Google's cadvisor](https://github.com/google/cadvisor).  
+
+See `cadvisor/docker-compose.yml` for the conifguration.   Note that this configuration is for docker installed via snap. 
+
+If you installed docker directly on your system, you will need to modify one of the `volume` mappings:
+
+```
+"/var/lib/docker:/var/lib/docker:ro"
+```
+
+You can now start cadvisor running:
+
+```
+docker-compose up -d
+```
+Check for cadvisor exposing a page of metrics:
+
+```
+curl   https://<hostname or ip of host where cadvisor is running>:8088/metrics
+```
+
+Next, you need to add a scrape job for prometheus in the `prometheus/config/prometheus.yml` file.  Here, we will assume you have the monitoring network setup with naming service available. You can, of course, use static configs for your own network instead.
+
+```
+scrape_configs:
+
+  - job_name: <meaningful name for this server level scrape job>
+    dns_sd_configs:
+    - names: [<name or id of cadivisor container>]
+      type: A
+      port: 8080
+```
+
+After saving the scape configuration, restart the prometheus container.
+
+In the `prometheus` directory.
+
+```
+docker-compose down
+
+docker-compose up -d
+```
+
+At this point, you can login to grafana, and import the [Docker monitoring with node selection](https://grafana.com/grafana/dashboards/8321) dashboard by Nazar; its id is `8321`.  
+
+Refresh grafana, and you should see the metrics start to display for all your running containers.
+
+![Container metrics displayed in grafana](images/dockerstats.png)
+
