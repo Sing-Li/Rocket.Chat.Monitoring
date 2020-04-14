@@ -328,19 +328,37 @@ You can now start cadvisor running:
 ```
 docker-compose up -d
 ```
+Check for cadvisor exposing a page of metrics:
 
-Next, you need to add a scrape job for prometheus in the `prometheus/config/prometheus.yml` file.  Here, we will assume you have the monitoring network setup with naming service available.
+```
+curl   https://<hostname or ip of host where cadvisor is running>:8088/metrics
+```
+
+Next, you need to add a scrape job for prometheus in the `prometheus/config/prometheus.yml` file.  Here, we will assume you have the monitoring network setup with naming service available. You can, of course, use static configs for your own network instead.
 
 ```
 scrape_configs:
 
-  - job_name: containers
+  - job_name: <meaningful name for this server level scrape job>
     dns_sd_configs:
     - names: [<name or id of cadivisor container>]
       type: A
       port: 8080
 ```
 
+After saving the scape configuration, restart the prometheus container.
+
+In the `prometheus` directory.
+
+```
+docker-compose down
+
+docker-compose up -d
+```
+
+At this point, you can login to grafana, and import the [Docker monitoring with node selection](https://grafana.com/grafana/dashboards/8321) dashboard by Nazar; its id is `8321`.  
+
+Refresh grafana, and you should see the metrics start to display for all your running containers.
 
 
 
