@@ -360,5 +360,5 @@ At this point, you can login to grafana, and import the [Docker monitoring with 
 
 Refresh grafana, and you should see the metrics start to display for all your running containers.
 
-
+![Container metrics displayed in grafana](images/dockerstats.png)
 
