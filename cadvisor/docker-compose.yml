@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  cadvisor:
+    image: gcr.io/google-containers/cadvisor:v0.35.0
+
+    volumes:
+      - "/:/rootfs:ro"
+      - "/var/run:/var/run:ro"
+      - "/sys:/sys:ro"
+      - "/var/snap/docker/common/var-lib-docker:/var/lib/docker:ro"
+      - "/dev/disk/:/dev/disk:ro"
+    ports:
+      - "8088:8080"
+    mem_limit: 1G
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    external: true
+
