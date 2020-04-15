@@ -362,3 +362,8 @@ Refresh grafana, and you should see the metrics start to display for all your ru
 
 ![Container metrics displayed in grafana](images/dockerstats.png)
 
+#### 7.   (optional) Add monitoring for Jisti-meet video conferencing server / cluster
+
+Many of you may have an open source [Jitsi-meet video conferencing server](https://jitsi.org/) or cluster that you want to add to your monitoring system. 
+
+By now, the procedures detailed in step 1-6 should become very familiar.   You will need first to install a metrics exporter for Jitsi.   
